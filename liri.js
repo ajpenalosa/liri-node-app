@@ -14,11 +14,23 @@ var command = process.argv[2];
 switch (command) {
 
     case "my-tweets":
+
+        var twitterParameters = {
+            count: 20
+        }
     
-        client.get('favorites/list', function(error, tweets, response) {
+        client.get('statuses/user_timeline', twitterParameters, function(error, tweets) {
             if(error) throw error;
-            console.log(tweets);  // The favorites.
-            console.log(response);  // Raw response object.
+
+            // console.log(tweets);
+
+            console.log("\r\nThese are my latest " + twitterParameters.count + " tweets:\r\n")
+
+            for ( var i = 0; i < tweets.length; i++ ) {
+                console.log(tweets[i].created_at.slice(0, 16) + ": " + tweets[i].text);
+            }
+
+            console.log("\r\n")
         });
 
     break;
