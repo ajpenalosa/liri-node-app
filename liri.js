@@ -4,6 +4,7 @@ require("dotenv").config();
 var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
 var Twitter = require('twitter');
+var request = require("request");
 
 // Importing keys
 var spotify = new Spotify(keys.spotify);
@@ -90,8 +91,65 @@ switch (command) {
     break;
 
     case "movie-this":
+    
+        // Store all of the arguments in an array
+        var nodeArgs = process.argv;
 
-    console.log("Movies");
+        // Create an empty variable for holding the movie name
+        var movieName = "";
+
+        // Loop through all the words in the node argument
+        for (var i = 3; i < nodeArgs.length; i++) {
+            if (i > 3 && i < nodeArgs.length) {
+                movieName = movieName + "+" + nodeArgs[i];
+            }
+            else {
+                movieName += nodeArgs[i];
+            }
+        }
+
+        // If no movie is input, use Mr. Nobody
+        if ( nodeArgs.length === 3 ) {
+            movieName = "Mr. Nobody";
+        }
+
+        // Run request to OMDB API
+        var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
+
+        request(queryUrl, function(error, response, body) {
+
+            // Store the body in a variable
+            var object = JSON.parse(body);
+        
+          // If the request is successful and movie is found
+          if ( !error && response.statusCode === 200 && object.Response === "True" ) {
+
+            // Store the ratings object in a variable
+            var ratings = object.Ratings;
+
+            console.log("\r\nTitle: " + object.Title);
+            console.log("Year: " + object.Year);
+            console.log("IMDB Rating: " + object.imdbRating);
+
+            // Loop through ratings to find Rotten Tomatoes
+            for ( var i = 0; i < ratings.length; i++ ) {
+                if ( ratings[i].Source === "Rotten Tomatoes") {
+                    console.log("Rotten Tomatoes Rating: " + ratings[i].Value);
+                }
+            }
+
+            console.log("Country: " + object.Country);
+            console.log("Language: " + object.Language);
+            console.log("Plot: " + object.Plot);
+            console.log("Actors: " + object.Actors + "\r\n");
+          }
+          else {
+
+            // Console log "Movie not found"
+            console.log("\r\n" + object.Error + "\r\n");
+          }
+        });
+        
 
     break;
 
