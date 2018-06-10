@@ -76,6 +76,10 @@ switch (command) {
                 return console.log('Error occurred: ' + err);
             }
 
+            if ( data.tracks.total === 0 ) {
+                console.log("\r\nYour search returned no results.\r\n");
+            }
+
             for ( var i = 0; i < data.tracks.items.length; i++ ) {
                 console.log("\r\n#" + (i+1) );
                 console.log("Song Name: " + data.tracks.items[i].name);
@@ -88,6 +92,8 @@ switch (command) {
                     console.log("Preview Link: N/A");
                 }
             }
+
+            console.log(" ");
 
             // console.log("\r\n" + JSON.stringify(data.tracks.items[0], null, 2) + "\r\n");
 
