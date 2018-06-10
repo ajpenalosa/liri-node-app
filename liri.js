@@ -81,10 +81,15 @@ switch (command) {
                 console.log("Song Name: " + data.tracks.items[i].name);
                 console.log("Artist: " + data.tracks.items[i].artists[0].name);
                 console.log("Album: " + data.tracks.items[i].album.name);
-                console.log("Preview Link: " + data.tracks.items[i].preview_url);
+                if (data.tracks.items[i].preview_url) {
+                    console.log("Preview Link: " + data.tracks.items[i].preview_url);
+                }
+                else {
+                    console.log("Preview Link: N/A");
+                }
             }
 
-            console.log("\r\n");
+            // console.log("\r\n" + JSON.stringify(data.tracks.items[0], null, 2) + "\r\n");
 
         });
 
