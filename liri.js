@@ -76,7 +76,6 @@ function spotifyThisSong() {
     }
 
     else {
-        console.log("The Sign, by Ace of Base");
         songName = "The Sign Ace of Base";
     }
 
@@ -114,25 +113,48 @@ function spotifyThisSong() {
             var album = "Album: " + data.tracks.items[i].album.name;
             var previewLink = "";
 
-            // Console logging the information
-            console.log(resultNumber);
-            console.log(songName);
-            console.log(artist);
-            console.log(album);
-            if (data.tracks.items[i].preview_url) {
+            // If the song is The Sign, by Ace of Base
+            if ( data.tracks.items[i].name === "The Sign" && data.tracks.items[i].artists[0].name === "Ace of Base" ) {
+
+                // Console logging the information
+                console.log("\r\n" + songName);
+                console.log(artist);
+                console.log(album);
                 previewLink = "Preview Link: " + data.tracks.items[i].preview_url;
+                console.log(previewLink);
+
+                // Logging the information to log.txt
+                log.push("\r\n" + songName + "\r\n");
+                log.push(artist + "\r\n");
+                log.push(album + "\r\n");
+                log.push(previewLink + "\r\n");
+                
+                break;
+
             }
             else {
-                previewLink = "Preview Link: N/A";
-            }
-            console.log(previewLink);
 
-            // Logging the information to log.txt
-            log.push(resultNumber + "\r\n");
-            log.push(songName + "\r\n");
-            log.push(artist + "\r\n");
-            log.push(album + "\r\n");
-            log.push(previewLink + "\r\n");
+                // Console logging the information
+                console.log(resultNumber);
+                console.log(songName);
+                console.log(artist);
+                console.log(album);
+                if (data.tracks.items[i].preview_url) {
+                    previewLink = "Preview Link: " + data.tracks.items[i].preview_url;
+                }
+                else {
+                    previewLink = "Preview Link: N/A";
+                }
+                console.log(previewLink);
+    
+                // Logging the information to log.txt
+                log.push(resultNumber + "\r\n");
+                log.push(songName + "\r\n");
+                log.push(artist + "\r\n");
+                log.push(album + "\r\n");
+                log.push(previewLink + "\r\n");
+
+            }
             
         }
 
@@ -254,7 +276,7 @@ function doWhatItSays() {
             return console.log(error);
         }
 
-        // This the text by the comma
+        // Split the text by the comma
         var dataArr = data.split(",");
 
         // Store the first half in a variable
