@@ -4,11 +4,11 @@ LIRI is a Language Interpretation and Recognition Interface. LIRI is a command l
 
 Type each of the following commands in the terminal to have LIRI do something.
 
-1. node liri.js my-tweets
+**1. node liri.js my-tweets**
 
 This will show my last 20 tweets and when they were created.
 
-2. node liri.js spotify-this-song song-name-here
+**2. node liri.js spotify-this-song song-name-here**
 
 This will show the following information about the song you searched for
 
@@ -19,7 +19,7 @@ This will show the following information about the song you searched for
 
 If no song is provided, then LIRI will display info for "The Sign" by Ace of Base.
 
-3. node liri.js movie-this movie-name-here
+**3. node liri.js movie-this movie-name-here**
 
 This will show the following information about the movie you searched for.
 
@@ -34,10 +34,10 @@ This will show the following information about the movie you searched for.
 
 If no movie was provided, then LIRI will display info for "Mr. Nobody".
 
-4. node liri.js do-what-it-says
+**4. node liri.js do-what-it-says**
 
 LIRI will take the text inside random.txt and use it to call one of LIRI's commands.
 
-###BONUS
+### BONUS
 
 In addition to logging the data to the terminal window, the data will be appended to file called "log.txt".
